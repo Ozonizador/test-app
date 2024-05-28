@@ -2,6 +2,7 @@
 
 use App\Models\Exam;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get(
+    "/",
+    function () {
+        return view("welcome");
+    }
+);
 
-    $exams = Exam::get();
-
-    return View::make('home')->with('exams', $exams);
-});
+Route::get('/home', [ExamController::class, 'chooseExam']);
+Route::post('/home', [ExamController::class, 'exam'])->name('form.submit');
