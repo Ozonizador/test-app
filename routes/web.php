@@ -18,5 +18,5 @@ Route::get('/', function () {
 
     $exams = Exam::get();
 
-    return View::make('exam')->with('exams', $exams);
+    return View::make('home')->with('exams', $exams);
 });
