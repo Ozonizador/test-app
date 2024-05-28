@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Exam;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $exams = Exam::get();
+
+    return View::make('exam')->with('exams', $exams);
 });
