@@ -14,4 +14,9 @@ class Exam_History extends Model
     protected $fillable = ['history_id', 'participant', 'exam_id', 'total_score', 'created_at', 'updated_at'];
 
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function exam()
+    {
+        return $this->belongsTo(Exam::class);
+    }
 }

@@ -11,7 +11,17 @@ class Question extends Model
 
     protected $table = "questions";
 
-    protected $fillable = ['question_id', 'exam_id', 'name', 'score', 'created_at', 'updated_at'];
+    protected $fillable = ['question_id', 'exam_id', 'question', 'score', 'created_at', 'updated_at'];
 
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function exam()
+    {
+        return $this->belongsTo(Exam::class);
+    }
 }
