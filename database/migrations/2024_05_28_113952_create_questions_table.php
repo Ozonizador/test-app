@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->unsignedInteger('exam_id');
             $table->string('name', 1024);
             $table->integer('score');
+            $table->timestamps();
 
             // Foreign key constraint
             $table->foreign('exam_id')->references('exam_id')->on('exams')->onDelete('cascade');

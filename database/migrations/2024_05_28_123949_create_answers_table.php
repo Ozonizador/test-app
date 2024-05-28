@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->unsignedInteger('question_id');
             $table->string('answer', 1024);
             $table->boolean('is_correct');
+            $table->timestamps();
 
             // Foreign key constraint
             $table->foreign('question_id')->references('question_id')->on('questions')->onDelete('cascade');
