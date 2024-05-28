@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('question_id');
             $table->unsignedInteger('exam_id');
-            $table->string('name', 1024);
+            $table->string('question', 1024);
             $table->integer('score');
             $table->timestamps();
 
