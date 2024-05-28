@@ -10,11 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('questions', function (Blueprint $table) {
-            $table->increments('question_id');
+        Schema::create('exam_history', function (Blueprint $table) {
+            $table->increments('history_id');
+            $table->string('participant', 128);
             $table->unsignedInteger('exam_id');
-            $table->string('name', 1024);
-            $table->integer('score');
+            $table->integer('total_score');
 
             // Foreign key constraint
             $table->foreign('exam_id')->references('exam_id')->on('exams')->onDelete('cascade');
@@ -26,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('exam_history');
     }
 };
