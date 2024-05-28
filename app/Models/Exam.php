@@ -11,6 +11,7 @@ class Exam extends Model
 
     protected $table = "exams";
 
-    protected $fillable = ['exam_id', 'name', 'required_score'];
+    protected $fillable = ['exam_id', 'name', 'required_score', 'created_at', 'updated_at'];
 
+    protected $hidden = ['created_at', 'updated_at'];
 }
