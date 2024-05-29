@@ -23,4 +23,7 @@ Route::get(
 );
 
 Route::get('/home', [ExamController::class, 'chooseExam']);
-Route::post('/home', [ExamController::class, 'exam'])->name('form.submit');
+
+Route::post('/exam', [ExamController::class, 'exam'])->name('exam.choose');
+
+Route::post('/exam-result', [ExamController::class, 'getResults'])->name('exam.submit');
