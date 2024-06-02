@@ -11,7 +11,7 @@ class User extends Model
 
     protected $table = "users";
 
-    protected $fillable = ['user_id', 'username', 'password', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'username', 'email', 'password', 'created_at', 'updated_at'];
 
     protected $hidden = ['created_at', 'updated_at'];
 }
