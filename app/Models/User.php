@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     use HasFactory;
 
     protected $table = "users";
 
-    protected $fillable = ['user_id', 'username', 'email', 'password', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'name', 'email', 'password', 'created_at', 'updated_at'];
 
     protected $hidden = ['created_at', 'updated_at'];
 }
