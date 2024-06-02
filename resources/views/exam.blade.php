@@ -1,36 +1,28 @@
 @extends('layout')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row justify-content-md-center">
-            <div class="col-md-9 ">
-                <div class="card px-5 py-3 mt-5 shadow">
-                    <h1 class="text-center mt-3 mb-4">{{ $exam->name }}</h1>
-                    <form action="{{ route('exam.submit') }}" method="post" class="employee-form">
-                        @csrf
-                        @foreach ($questions as $index => $question)
-                            <div class="form-section" id="question-{{ $question->question_id }}">
-                                <h4>Question {{ $index + 1 }}: {{ $question->question }}</h4>
-                                @foreach ($answers->where('question_id', $question->question_id) as $answer)
-                                    <div>
-                                        <input type="radio" id={{ $answer->answer_id }}
-                                            value='answer-{{ $answer->answer_id }}'
-                                            name='question-{{ $question->question_id }}' />
-                                        <label for={{ $answer->answer_id }}>{{ $answer->answer }}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endforeach
-                        <div class="form-navigation mt-3">
-                            <button type="button" class="previous button-inverse float-left">&lt;Previous</button>
-                            <button type="button" class="next button float-right">Next &gt;</button>
-                            <button type="submit" class="btn btn-success float-right">Submit</button>
-                        </div>
-                    </form>
-                </div>
+    <form action="{{ route('exam.submit') }}" method="post" class="employee-form" id="exam">
+        <h1 class="text-center mt-3 mb-4" name="exam">{{ $exam->name }}</h1>
+        @csrf
+        @foreach ($questions as $index => $question)
+            <div class="form-section" id="question-{{ $question->question_id }}">
+                <h4>Question {{ $index + 1 }}: {{ $question->question }}</h4>
+                @foreach ($answers->where('question_id', $question->question_id) as $answer)
+                    <div>
+                        <input type="radio" id={{ $answer->answer_id }} value='answer-{{ $answer->answer_id }}'
+                            name='question-{{ $question->question_id }}' required />
+                        <label for={{ $answer->answer_id }}>{{ $answer->answer }}</label>
+                    </div>
+                @endforeach
             </div>
+        @endforeach
+        <div class="form-navigation mt-3">
+            <button type="button" class="previous button-inverse float-left">&lt;Previous</button>
+            <button type="button" class="next button float-right">Next &gt;</button>
+            <button type="submit" class="btn btn-success float-right">Submit</button>
         </div>
-    </div>
+    </form>
+
     <script>
         $(function() {
             var $sections = $('.form-section');
@@ -66,6 +58,24 @@
             });
 
             navigateTo(0);
+        });
+
+        document.getElementById('exam').addEventListener('submit', function(event) {
+            var form = document.getElementById('exam');
+
+            // Create a hidden input field
+            var hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'participant';
+            hiddenInput.value = '{{ $participant }}';
+
+            var hiddenInput2 = document.createElement('input');
+            hiddenInput2.type = 'hidden'
+            hiddenInput2.name = 'exam_id';
+            hiddenInput2.value = '{{ $exam->exam_id }}';
+
+            form.appendChild(hiddenInput);
+            form.appendChild(hiddenInput2);
         });
     </script>
 @stop

@@ -18,10 +18,19 @@
 <body>
     <section class="navbar">
         <h1>Exams</h1>
+        <button class="float-right">Login</button>
     </section>
 
     <section class='content'>
-        @yield('content')
+        <div class="container-fluid">
+            <div class="row justify-content-md-center">
+                <div class="col-md-9 ">
+                    <div class="card px-5 py-3 mt-5 shadow">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </body>
 

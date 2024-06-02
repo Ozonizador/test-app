@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exam_History;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Exam;
@@ -32,9 +33,14 @@ class ExamController extends Controller
     {
         // Get answers given
         $answersGiven = request()->all();
+        $participant = request()->get('participant', '');
+        $exam_id = request()->get('exam_id', null);
+        $exam = Exam::where('exam_id', $exam_id)->first();
+
         $totalScore = 0;
 
         foreach ($answersGiven as $answer) {
+
             // Get question by id
             $parts = explode('-', $answer);
             $answerId = isset($parts[1]) ? $parts[1] : '';
@@ -47,6 +53,13 @@ class ExamController extends Controller
             }
         }
 
-        dump($totalScore);
+        // Save the exam to the db 
+        $history = new Exam_History();
+        $history->participant = $participant;
+        $history->total_score = $totalScore;
+        $history->exam_id = $exam_id;
+        $history->save();
+
+        return view('exam-result', ['total_score' => $totalScore, 'participant' => $participant, 'exam' => $exam]);
     }
 }

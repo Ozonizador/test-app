@@ -1,38 +1,31 @@
 @extends('layout')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row justify-content-md-center">
-            <div class="col-md-9 ">
-                <div class="card px-5 py-3 mt-5 shadow">
-                    <h1 class="text-center mt-3 mb-4">Take an exam</h1>
-                    <form action="{{ route('exam.choose') }}" method="post" class="employee-form">
-                        @csrf
-                        <div class="form-section">
-                            <h4>Please fill in your information to proceed:</h4>
-                            <label for="">Name:</label>
-                            <input type="text" class="form-control mb-3" name="name" required>
-                        </div>
-                        <div class="form-section">
-                            <h4>Select the exam:</h4>
-                            @foreach ($exams as $exam)
-                                <div>
-                                    <input type="radio" id={{ $exam->exam_id }} value={{ $exam->exam_id }}
-                                        name="exam" />
-                                    <label for={{ $exam->exam_id }}>{{ $exam->name }}</label>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="form-navigation mt-3">
-                            <button type="button" class="previous button-inverse float-left">&lt;Previous</button>
-                            <button type="button" class="next button float-right">Next &gt;</button>
-                            <button type="submit" class="btn btn-success float-right">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+
+    <h1 class="text-center mt-3 mb-4">Take an exam</h1>
+    <form action="{{ route('exam.choose') }}" method="post" class="employee-form">
+        @csrf
+        <div class="form-section">
+            <h4>Please fill in your information to proceed:</h4>
+            <label for="">Name:</label>
+            <input type="text" class="form-control mb-3" name="name" required>
         </div>
-    </div>
+        <div class="form-section">
+            <h4>Select the exam:</h4>
+            @foreach ($exams as $exam)
+                <div>
+                    <input type="radio" id={{ $exam->exam_id }} value={{ $exam->exam_id }} name="exam" />
+                    <label for={{ $exam->exam_id }}>{{ $exam->name }}</label>
+                </div>
+            @endforeach
+        </div>
+        <div class="form-navigation mt-3">
+            <button type="button" class="previous button-inverse float-left">&lt;Previous</button>
+            <button type="button" class="next button float-right">Next &gt;</button>
+            <button type="submit" class="btn btn-success float-right">Submit</button>
+        </div>
+    </form>
+
 
 
     <script>
