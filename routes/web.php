@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', [ExamController::class, 'chooseExam']);
+Route::get('/', [ExamController::class, 'chooseExam'])->name('home');
 
 Route::post('/exam', [ExamController::class, 'exam'])->name('exam.choose');
 
