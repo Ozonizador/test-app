@@ -29,10 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', [ExamController::class, 'chooseExam'])->name('home');
 
+// Routes for exams
+Route::get('/', [ExamController::class, 'chooseExam'])->name('exam.choose.get');
+Route::get('/results', [ExamController::class, 'SeePastResults'])->name('exam.past-results');
 Route::post('/exam', [ExamController::class, 'exam'])->name('exam.choose');
-
 Route::post('/exam-result', [ExamController::class, 'getResults'])->name('exam.result');
 
 

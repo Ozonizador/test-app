@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('exam_history', function (Blueprint $table) {
             $table->increments('history_id');
-            $table->string('participant', 128)->nullable();
+            $table->string('name', 128)->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('exam_id');
             $table->integer('total_score');

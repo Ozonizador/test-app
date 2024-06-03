@@ -13,7 +13,7 @@ class ExamController extends Controller
     public function chooseExam()
     {
         $exams = Exam::get();
-        return view('home', ['exams' => $exams]);
+        return view('exams/exam-choose', ['exams' => $exams]);
     }
 
     public function exam()
@@ -27,7 +27,7 @@ class ExamController extends Controller
         $questions = Question::where('exam_id', $exam_id)->get();
         $answers = Answer::whereIn('question_id', $questions->pluck('question_id'))->get();
 
-        return view('exam', ['exam' => $exam, 'questions' => $questions, 'answers' => $answers, 'participant' => $participant]);
+        return view('exams/exam', ['exam' => $exam, 'questions' => $questions, 'answers' => $answers, 'participant' => $participant]);
     }
 
     public function getResults()
@@ -38,6 +38,7 @@ class ExamController extends Controller
         $exam_id = request()->get('exam_id', null);
         $exam = Exam::where('exam_id', $exam_id)->first();
 
+        $maxScore = Question::where('exam_id', $exam_id)->max('score');
         $totalScore = 0;
 
         foreach ($answersGiven as $answer) {
@@ -68,6 +69,27 @@ class ExamController extends Controller
         $history->exam_id = $exam_id;
         $history->save();
 
-        return view('exam-result', ['total_score' => $totalScore, 'participant' => $participant, 'exam' => $exam]);
+        return view('exams/exam-result', ['total_score' => $totalScore, 'max_score' => $maxScore, 'participant' => $participant, 'exam' => $exam]);
+    }
+
+    public function SeePastResults()
+    {
+        if (Auth::check()) {
+            $exams = Exam_History::where('user_id', Auth::id())->get();
+
+        } else {
+        }
+
+        return view('exams/exam-past-results', ['exams' => $exams]);
+    }
+
+
+    public function SeeAllResults()
+    {
+        if (Auth::check() && Auth::user()->role_id == 2) {
+            $exams = Exam_History::get();
+
+            return view('', ['exams' => $exams]);
+        }
     }
 }
