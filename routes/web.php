@@ -15,7 +15,7 @@ use App\Http\Controllers\ExamController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/home', [ExamController::class, 'chooseExam']);
+Route::get('/', [ExamController::class, 'chooseExam']);
 
 Route::post('/exam', [ExamController::class, 'exam'])->name('exam.choose');
 
