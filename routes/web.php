@@ -33,7 +33,7 @@ Route::get('/', [ExamController::class, 'chooseExam']);
 
 Route::post('/exam', [ExamController::class, 'exam'])->name('exam.choose');
 
-Route::post('/exam-result', [ExamController::class, 'getResults'])->name('exam.submit');
+Route::post('/exam-result', [ExamController::class, 'getResults'])->name('exam.result');
 
 
 require __DIR__ . '/auth.php';

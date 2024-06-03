@@ -15,4 +15,9 @@ class User extends Authenticatable
     protected $fillable = ['id', 'name', 'email', 'password', 'created_at', 'updated_at'];
 
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function exam_history()
+    {
+        return $this->hasMany(Exam_History::class);
+    }
 }

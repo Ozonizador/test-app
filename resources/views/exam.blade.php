@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <form action="{{ route('exam.submit') }}" method="post" class="employee-form" id="exam">
+    <form action="{{ route('exam.result') }}" method="POST" class="employee-form" id="exam">
         <h1 class="text-center mt-3 mb-4" name="exam">{{ $exam->name }}</h1>
         @csrf
         @foreach ($questions as $index => $question)

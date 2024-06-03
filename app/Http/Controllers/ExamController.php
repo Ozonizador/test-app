@@ -6,6 +6,7 @@ use App\Models\Exam_History;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Exam;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -52,10 +53,17 @@ class ExamController extends Controller
                 $totalScore += $question->score;
             }
         }
-
-        // Save the exam to the db 
+        // Create the exam and add necessary info
         $history = new Exam_History();
-        $history->participant = $participant;
+
+        if (Auth::check()) {
+            $history->user_id = Auth::id();
+            $history->name = null;
+        } else {
+            $history->user_id = null;
+            $history->name = $participant;
+        }
+
         $history->total_score = $totalScore;
         $history->exam_id = $exam_id;
         $history->save();

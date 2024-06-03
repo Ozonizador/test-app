@@ -11,7 +11,7 @@ class Exam_History extends Model
 
     protected $table = "exam_history";
 
-    protected $fillable = ['history_id', 'participant', 'exam_id', 'total_score', 'created_at', 'updated_at'];
+    protected $fillable = ['history_id', 'participant', 'user_id', 'exam_id', 'total_score', 'created_at', 'updated_at'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
