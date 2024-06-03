@@ -5,11 +5,16 @@
     <h1 class="text-center mt-3 mb-4">Take an exam</h1>
     <form action="{{ route('exam.choose') }}" method="post" class="employee-form">
         @csrf
-        <div class="form-section">
-            <h4>Please fill in your information to proceed:</h4>
-            <label for="">Name:</label>
-            <input type="text" class="form-control mb-3" name="name" required>
-        </div>
+        @if (Route::has('login'))
+            @auth
+            @else
+                <div class="form-section">
+                    <h4>Please fill in your information to proceed:</h4>
+                    <label for="">Name:</label>
+                    <input type="text" class="form-control mb-3" name="name" required>
+                </div>
+            @endauth
+        @endif
         <div class="form-section">
             <h4>Select the exam:</h4>
             @foreach ($exams as $exam)
