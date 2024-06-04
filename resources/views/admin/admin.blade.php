@@ -7,9 +7,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg max-w-sm">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-fit">
                 <div class="p-6 text-gray-900">
-                    {{ Route::currentRouteName() }}
+                    Number of exams taken:
+                    <div class="text-2xl text-center mt-4">{{ count($exams) }}</div>
                 </div>
             </div>
         </div>

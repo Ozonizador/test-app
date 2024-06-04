@@ -12,6 +12,19 @@ class AdminController extends Controller
 {
     public function adminDashboard()
     {
-        return view("admin");
+        $exams = Exam_History::orderBy("created_at", "desc")->get();
+        return view("admin/admin", ["exams" => $exams]);
+    }
+
+    public function examResults()
+    {
+        $exams = Exam_History::orderBy("created_at", "desc")->get();
+
+        return view("admin/admin-exam-results", ["exams" => $exams]);
+    }
+
+    public function editExams()
+    {
+        $exams = Exam_History::orderBy("created_at", "desc")->get();
     }
 }
