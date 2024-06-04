@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,8 @@ Route::get('/results', [ExamController::class, 'SeePastResults'])->name('exam.pa
 Route::post('/exam', [ExamController::class, 'exam'])->name('exam.choose');
 Route::post('/exam-result', [ExamController::class, 'getResults'])->name('exam.result');
 
+
+// Routes for admin
+Route::get('/admin', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
 
 require __DIR__ . '/auth.php';

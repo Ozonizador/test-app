@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,14 +15,35 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('exam.choose.get')" :active="request()->routeIs('exam.choose.get')">
-                        {{ __('Take an Exam') }}
-                    </x-nav-link>
-                </div>
+                @if (Str::contains(Route::currentRouteName(), 'admin') && Auth::user()->role_id == '2')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin')">
+                            {{ __('Admin') }}
+                        </x-nav-link>
+                        {{-- 
+                        <x-nav-link :href="route('')" :active="request()->routeIs('')">
+                            {{ __('Edit Exams') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('')" :active="request()->routeIs('')">
+                            {{ __('See Exam Results') }}
+                        </x-nav-link> --}}
+                    </div>
+                @else
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('exam.choose.get')" :active="request()->routeIs('exam.choose.get')">
+                            {{ __('Take an Exam') }}
+                        </x-nav-link>
+
+                        @if (Auth::user()->role_id == '2')
+                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                                {{ __('Admin') }}
+                            </x-nav-link>
+                        @endif
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
