@@ -20,11 +20,10 @@
                         <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin')">
                             {{ __('Admin') }}
                         </x-nav-link>
-                        {{-- 
-                        <x-nav-link :href="route('')" :active="request()->routeIs('')">
+                        <x-nav-link :href="route('admin.edit-exams')" :active="request()->routeIs('admin.edit-exams')">
                             {{ __('Edit Exams') }}
-                        </x-nav-link> --}}
-                        <x-nav-link :href="route('admin.results')" :active="request()->routeIs('admin/results')">
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.results')" :active="request()->routeIs('admin.results')">
                             {{ __('See Exam Results') }}
                         </x-nav-link>
                     </div>
