@@ -41,5 +41,8 @@ Route::post('/exam-result', [ExamController::class, 'getResults'])->name('exam.r
 // Routes for admin
 Route::get('/admin', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
 Route::get('/admin/results', [AdminController::class, 'examResults'])->name('admin.results');
+Route::get('/admin/edit-exams', [AdminController::class, 'editExams'])->name('admin.edit-exams');
+
+Route::post('/admin/edit-exam/{id}', [AdminController::class, 'editExamById'])->name('admin.edit-exam.id');
 
 require __DIR__ . '/auth.php';
