@@ -13,6 +13,7 @@ class AdminController extends Controller
     public function adminDashboard()
     {
         $exams = Exam_History::orderBy("created_at", "desc")->get();
+
         return view("admin/admin", ["exams" => $exams]);
     }
 
@@ -25,6 +26,22 @@ class AdminController extends Controller
 
     public function editExams()
     {
-        $exams = Exam_History::orderBy("created_at", "desc")->get();
+        $exams = Exam::orderBy("created_at", "desc")->get();
+
+        return view("admin/admin-edit-exams", ["exams" => $exams]);
+    }
+
+    public function editExamById(int $id)
+    {
+        $exam = Exam::find($id);
+        $questions = Question::where("exam_id", $id)->get();
+        $answers = [];
+
+        foreach ($questions as $question) {
+            $questionAnswer = Answer::where("question_id", $question->id)->get();
+            $answers[$question->id] = $questionAnswer;
+        }
+
+        dd($questions, $answers);
     }
 }
